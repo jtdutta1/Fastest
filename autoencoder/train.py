@@ -44,7 +44,7 @@ def main():
     # Define model, loss function and optimizer 
     net = EncoderDecoder()
     net.to(device)
-    epochs=30
+    epochs=10
     optimizer = Adam(net.parameters(), lr=0.001, weight_decay=1e-7)
     loss_fn = MSELoss(reduction="mean")
     
@@ -95,7 +95,7 @@ def main():
                 loss = loss_fn(imgs, y_pred)
                 val_loss.append(loss.item())
                 print("{}/{}. Train Loss: {:.2f}".format(counter, len(val_data)//32, loss.item()), end="\r")
-        
+        print()
         val_loss = np.array(val_loss)
         print("Training loss epoch: {:.2f}\tValidation loss: {:.2f}".format(epoch_loss.mean(), val_loss.mean()))
     
